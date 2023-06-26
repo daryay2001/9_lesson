@@ -8,17 +8,26 @@ def generate_random_list(list_len, start_value=1, end_value=100):
 
     return nums
 
+#######
+# Сортировка пузырьком (Bubble sort)
+#
+# При каждом проходе алгоритма по внутреннему циклу очередной наибольший элемент массива ставится
+# на своё место в конце массива рядом с предыдущим «наибольшим элементом»,
+# а наименьший элемент перемещается на одну позицию к началу массива («всплывает» до нужной позиции)
 
 def bubble_sort(nums):
-    swapped = True
+    not_sorted = True
 
-    while swapped:
-        swapped = False
+    while not_sorted:
+        not_sorted = False
         for i in range(len(nums) - 1):
             if nums[i] > nums[i + 1]:
                 nums[i], nums[i + 1] = nums[i + 1], nums[i]
-                swapped = True
+                not_sorted = True
 
+####
+# Сортировка выбором - это алгоритм сортировки массива или списка путем постепенных перестановок
+# наименьших элементов в начало списка или наибольших в конец.
 
 def selection_sort(nums):
     for i in range(len(nums)):
@@ -27,8 +36,10 @@ def selection_sort(nums):
             if nums[j] < nums[lowest_value_index]:
                 lowest_value_index = j
         nums[i], nums[lowest_value_index] = nums[lowest_value_index], nums[i]
-
-
+#
+#Сортировка вставками (англ. Insertion sort) — алгоритм сортировки, в котором элементы входной
+# последовательности просматриваются по одному, и каждый новый поступивший элемент размещается
+# в подходящее место среди ранее упорядоченных элементов
 def insertion_sort(nums):
     for i in range(1, len(nums)):
         item_to_insert = nums[i]
@@ -39,8 +50,8 @@ def insertion_sort(nums):
             j -= 1
         # вставка элемента
         nums[j + 1] = item_to_insert
-
-
+#
+# Принцип Разделяй и властвуй
 def merge(left_list, right_list):
     sorted_list = []
     left_list_index = right_list_index = 0
@@ -67,7 +78,7 @@ def merge(left_list, right_list):
             left_list_index += 1
     return sorted_list
 
-
+#
 def merge_sort(nums):
     if len(nums) <= 1:
         return nums
@@ -78,8 +89,8 @@ def merge_sort(nums):
     right_list = merge_sort(nums[middle_index:])
 
     return merge(left_list, right_list)
-
-
+#
+#
 def partition(nums, low_index, high_index):
     # выбираем средний элемент в качестве опорного
     # так же возможен выбор первого, последнего или произвольного эл-тов в качестве опорного
@@ -103,7 +114,8 @@ def partition(nums, low_index, high_index):
         # то меняем их местами
         nums[i], nums[j] = nums[j], nums[i]
 
-
+# Быстрая сортировка, сортировка Хоара.
+# Один из самых быстрых известных универсальных алгоритмов сортировки массивов.
 def quick_sort(nums):
     # вспомогательная функция
     def _quick_sort(items, low_index, high_index):
@@ -114,8 +126,8 @@ def quick_sort(nums):
 
     _quick_sort(nums, 0, len(nums) - 1)
 
-
 #
+# #
 def linear_search_from_start(nums, search_item) -> int:
     for i in range(len(nums)):
         if nums[i] == search_item:
@@ -128,9 +140,9 @@ def linear_search_from_end(nums, search_item) -> int:
         if nums[i] == search_item:
             return i
     return -1
-
-
-# бинарный поиск работает ТОЛЬКО на отсортированном массиве
+#
+#
+# # бинарный поиск работает ТОЛЬКО на отсортированном массиве
 def binary_search(nums, search_item) -> int:
     first_index = 0
     last_index = len(nums) - 1
@@ -147,16 +159,16 @@ def binary_search(nums, search_item) -> int:
 
     return -1  # -1 означает что значение не найдено
 
-
+#
 # my_list = generate_random_list(5)
 # print(my_list)
-# bubble_sort(my_list)
-# selection_sort(my_list)
-# insertion_sort(my_list)
-# my_list = merge_sort(my_list)
+# # bubble_sort(my_list)
+# # selection_sort(my_list)
+# # insertion_sort(my_list)
+# # my_list = merge_sort(my_list)
 # quick_sort(my_list)
 # print(my_list)
-#
+# #
 numbers = [1, 4, 10, 5, 2, 10, 4, 10, 3]
 numbers.sort()
 print(numbers)
@@ -164,7 +176,8 @@ value = 5
 # result = linear_search_from_start(numbers, value)
 # result = linear_search_from_end(numbers, value)
 result = binary_search(numbers, value)
-
+# print(result)
+#
 if result != -1:
     print(f"{value} found on index: {result}")
 else:
